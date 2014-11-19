@@ -1,0 +1,74 @@
+/* #rafflebox {
+		background: url(../../pics/snow-bg.png) repeat-y center;
+		-webkit-animation: animate-snow 9s linear infinite;
+		-moz-animation: animate-snow 9s linear infinite;
+		-ms-animation: animate-snow 9s linear infinite;
+		animate: animate-snow 9s linear infinite;
+		
+} 
+snow animation
+@-webkit-keyframes animate-snow
+{
+	0% { background-position: center 0, 0 0;}
+	100% { background-position: center 885px, 0 0;}
+}
+@keyframes animate-snow
+{
+	0% { background-position: center 0, 0 0;}
+	100% { background-position: center 885px, 0 0;}
+}
+@-moz-keyframes animate-snow
+{
+	0% { background-position: center 0, 0 0;}
+	100% { background-position: center 885px, 0 0;}
+}
+animate-snow
+{
+	0% { background-position: center 0, 0 0;}
+	100% { background-position: center 885px, 0 0;}
+}   */
+/* 
+#snow{ 
+
+    background-image: url('http://i.imgur.com/BiSmXaq.png'), url('http://i.imgur.com/XHuy0NJ.png'), url('http://i.imgur.com/okpRxJU.png');
+	-webkit-animation: snow 20s linear infinite;
+    -moz-animation: snow 20s linear infinite;
+    -ms-animation: snow 20s linear infinite;
+    animation: snow 20s linear infinite;
+}
+@-webkit-keyframes snow {
+    0% { background-position: 0px 0px, 0px 0px, 0px 0px }
+    50% { background-color: #b4cfe0 }
+    100% {
+        background-position: 500px 1000px, 400px 400px, 300px 300px;
+        background-color: #6b92b9;
+    }
+}
+@-moz-keyframes snow {
+    0% { background-position: 0px 0px, 0px 0px, 0px 0px }
+    50% { background-color: #b4cfe0 }
+    100% {
+        background-position: 500px 1000px, 400px 400px, 300px 300px;
+        background-color: #6b92b9;
+    }
+}
+@-ms-keyframes snow {
+    0% { background-position: 0px 0px, 0px 0px, 0px 0px }
+    50% { background-color: #b4cfe0 }
+    100% {
+        background-position: 500px 1000px, 400px 400px, 300px 300px;
+        background-color: #6b92b9;
+    }
+}
+@keyframes snow {
+    0% { background-position: 0px 0px, 0px 0px, 0px 0px }
+    50% { background-color: #b4cfe0 }
+    100% {
+        background-position: 500px 1000px, 400px 400px, 300px 300px;
+        background-color: #6b92b9;
+    }
+}
+ */
+
+
+

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping> 
+	<class name="com.xplink.random_cm.datamodel.SlideShowUploadPreview" table="SLIDE_PREVIEW_UPLOAD">
+		<id name="uploadID" type="int" column="UPLOAD_ID">
+			<generator class="identity"/>
+		</id>
+		
+		<many-to-one name="slideRef" class="com.xplink.random_cm.datamodel.SlideShowPreview">
+			<column name="SLIDE_ID" not-null="true" />
+		</many-to-one>
+		
+		<property name="uploadType" type="string" column="UPLOAD_TYPE" ></property>
+        <property name="fileName" type="string" column="FILE_NAME" />
+        <property name="fileDESC" type="string" column="FILE_DESC" ></property>
+        
+        <property name="createdBy" type="string" column="CREATED_BY" />
+        <property name="updatedBy" type="string" column="UPDATED_BY" ></property>
+        <property name="createdDate" type="timestamp" column="CREATED_DATE" />
+        <property name="updatedDate" type="timestamp" column="UPDATED_DATE" />
+	</class>
+ </hibernate-mapping>

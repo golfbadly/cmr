@@ -1,0 +1,117 @@
+@CHARSET "UTF-8";
+
+
+#noteLayer{
+	font-family: akhanake;
+	line-height: 26px; 
+	position: absolute;
+	width: 350px;
+	height: 320px;
+	background: url('../../pics/noteC1.png') no-repeat ;
+	background-size:350px 300px;
+	left: 50%;
+	margin-left: -175px;
+	top: 300px;
+}
+#noteText{
+	background:rgba(146, 124, 33, 0);
+	border:0;
+	padding:0 0 0 0;
+	resize: none;
+	display:block;
+}
+
+#noteTitle{
+	position: absolute;
+	padding-top: 10px;
+	padding-left: 10px;
+	height: 40px ;
+	width:100% ;
+	font-size: 26px ;
+}
+#noteContent{
+	position: absolute;
+	padding-top: 50px;
+	padding-left: 30px ;
+	height: 230px ; 
+	background: transparent ;
+	word-warp: break-word;
+	word-break: break-word;
+}
+#editNoteContent{
+	float:left;
+	position: absolute;
+	margin-top: -330px;
+	padding: 15px;
+	opacity: 0 ;
+	filter: alpha(opacity=0);
+	margin-left: 10px;
+	width: 296px ;
+	height: 290px ; 
+	background: #CCC ;
+	word-warp: break-word;
+	word-break: break-word;
+	-webkit-transition: margin-top 0.7s, opacity 0.7s;
+	-moz-transition: margin-top 0.7s, opacity 0.7s;
+	-o-transition: margin-top 0.7s, opacity 0.7s;
+	transition: margin-top 0.7s, opacity 0.7s;
+	-webkit-box-shadow: 4px 4px 7px -1px #AAA;
+	box-shadow: 4px 4px 7px -1px #AAA;
+	z-index:-1;
+}
+#doneButton{
+	display: block;
+	float: left;
+	width:50px;
+	padding-right:10px;
+	-webkit-border-radius: 13px;
+	border-radius: 13px;
+	color: #CCC;
+	-webkit-transition: opacity 0.5s, display 0.5s;
+	-moz-transition: opacity 0.5s, display 0.5s;
+	-o-transition: opacity 0.5s, display 0.5s;
+	transition: opacity 0.5s, display 0.5s;
+	cursor: pointer;	
+}
+#doneButton:hover{
+	color: #444;
+	text-shadow: 1px 1px 7px #999;
+}
+#editButton{
+	width:50px;
+	display: block;
+	float:left;
+	padding-left: 30px;
+	-webkit-border-radius: 13px;
+	border-radius: 13px;
+	color: #CCC;
+	-webkit-transition: opacity 0.5s, display 0.5s;
+	-moz-transition: opacity 0.5s, display 0.5s;
+	-o-transition: opacity 0.5s, display 0.5s;
+	transition: opacity 0.5s, display 0.5s;
+	cursor: pointer ;	
+}
+#editButton:hover{
+	color: #444;
+	text-shadow: 1px 1px 7px #999;
+}
+#quillPen{
+	position: absolute ;
+	margin-left: 0px ;
+	max-width: 40px;
+	margin-top: inherit; 
+}
+@font-face {
+    font-family: akhanake;
+    src: url('Book_Akhanake.ttf')  format("truetype");
+}
+#textareaNote{
+	font-family: akhanake;
+	font-size: 16px ;
+	line-height: 26px ;
+	width: 275px;
+	padding: 10px;
+	resize: none;
+	height: 267px;
+	
+}

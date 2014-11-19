@@ -1,0 +1,816 @@
+@CHARSET "UTF-8";
+
+.body{
+/*   background-image: url("../../pics/xmas.jpg"); 
+  background-repeat: no-repeat; */
+  padding-top: 50px;
+  
+/*   background: url(../../pics/xmas.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; */
+ 
+}
+
+#page {
+	/*background-color: #B0E7EE;*/
+	background: url(../../pics/orderpage-bg.png) repeat-x scroll center top ;
+	margin: 0 auto 0 auto;
+	width: 800px;
+	height: 100%;
+	position: relative;
+}
+
+#content{
+    background-position: center 25px;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    width: 800px;
+    min-height: 700px;
+
+}
+
+	
+#nav-bar {
+	width: 800px;
+	font-family: Arial, Verdana;
+	font-size: 14px;
+	color: #ffffff;
+}
+
+#banner {
+ 	background: none repeat scroll 0 0 #BB2C2C;
+ 	margin-left: 12%;
+    float: left;
+    width: 58%; 
+    height:40px; 
+	}
+#banner, #nav-menu{
+	display:inline-block;
+}
+
+.nav-logout{
+	  padding: 14px 0 0 12px;
+}
+.nav-title{
+	  padding: 11px 0 0 12px; 
+}
+.nav-title a:hover {
+      text-decoration:none;
+}
+
+#ads {
+	margin-left: 30%;
+    position: relative;
+}
+
+}
+#nav {
+	/* margin: 0 auto 0 0; */
+/* 	float: left; */
+}
+
+/* h-nav bar */
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul li {
+    background: none repeat scroll 0 0 #099C38;
+    display: block;
+    float: left;
+    height: 40px;
+    text-align: center;
+    width: 70px;
+}
+
+li ul {
+	display: none;
+}
+
+ul li a {
+	/*display: block;
+	text-decoration: none;*/
+	color: #ffffff;
+	/*border-top: 0 solid #ffffff;
+	padding: 5px 15px 5px 15px; */
+	/*background: #2C5463;
+	margin-left: 0;
+	*/
+	white-space: nowrap;
+	/*float: left;*/
+}
+#formEvent input[type="text"],#formImage input[type="text"],#formImage textarea{
+border: 1px solid #BB2C2C;
+box-shadow: none;
+color: #BB2C2C;
+padding: 10px 5px 10px 5px;
+/*margin: 30px 0 20px 0;*/
+}
+#formImage input[type="button"],#formImage input[type="submit"]  {
+	background: none repeat scroll 0 0 #099C38;
+	border: 1px solid #FFFFFF;
+	box-shadow: none;
+	color: #FFFFFF;
+	padding: 10px 5px 10px 5px;
+}
+#formImage table{
+	border-spacing: 0px;
+}
+.add-delete button {
+	background: none repeat scroll 0 0 #FFD700;;
+	border: 1px solid #FFFFFF;
+	box-shadow: none;
+	color: #FFFFFF;
+	padding: 10px 5px 10px 5px;
+}
+#createBtn{
+	background: none repeat scroll 0 0 #099C38;
+	border: 1px solid #FFFFFF;
+	box-shadow: none;
+	color: #FFFFFF;
+	padding: 10px 5px 10px 5px;
+	
+}
+#backBtn{
+	margin-left: 20px;
+	background: none repeat scroll 0 0 #099C38;
+	border: 1px solid #FFFFFF;
+	box-shadow: none;
+	color: #FFFFFF;
+	padding: 10px 5px 10px 5px;
+}
+#createBtn, #backBtn{
+	display: inline;
+    float: left;
+}
+
+ul li:hover {
+	background: #FFD700;
+}
+
+li:hover ul {
+	display: block;
+}
+
+li:hover li {
+	float: none;
+	font-size: 11px;
+}
+
+li:hover a {
+	background: #FFD700;
+}
+
+li:hover li a:hover {
+	background: #95A9B1;
+}
+
+/* end h-nav bar */ /* v-nav menu */
+ul #v-nav {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+#v-nav li {
+	width: 250px; /*size of image*/
+	height: 50px; /* size of image*/
+}
+
+#v-nav li.first a {
+	background: url("../../pics/menu/btnMenuAdd.png") no-repeat scroll left top transparent;
+    text-align: center;
+    height: 40px;
+    width: 220px;
+    margin: auto auto auto -2px;
+    padding-top: 15px;
+    position: relative;
+    
+}  /* this holds the normal state of the image1*/
+#v-nav li.second a {
+	background: url(../../pics/menu/btnMenuList.png) no-repeat left top;
+	width: 220px;
+	height: 40px;
+	margin: auto auto auto -2px;
+    padding-top: 15px;
+    text-align: center;
+}  /* this holds the normal state of the image2*/
+#v-nav li.first {
+	background: url(../../pics/menu/btnMenuAddOver.png) no-repeat left top;
+}  /* this holds the rollover state of the image1*/
+#v-nav li.second {
+	background: url(../../pics/menu/btnMenuListOver.png) no-repeat left top;
+	margin-top: 15px;
+}  /* this holds the rollover state of the image2*/
+#v-nav li a:hover {
+	background: transparent
+}  /* when mouse over backgroud will transparent */
+
+#v-menu {
+	margin: 50% auto auto 10%;
+    position: relative;
+}
+
+.txt-menu li {
+	margin: 10px auto auto 65px;
+	font-size: 16px;
+}
+
+.head-text-eventlist {
+    font-size: 40px;
+    font-style: oblique;
+    font-variant: small-caps;
+    text-align: center;
+    width: 800px;
+    padding-top: 5%;
+}
+
+.add-event {
+    float: left;
+    margin-left: 45%;
+    position: relative;
+}
+.delete-event {
+    float: left;
+    margin-left: 5%;
+    position: relative;
+}
+#receiveGift{
+    cursor: pointer;
+    width: 70px;
+}
+
+/* end v-nav menu*/ /*  css of Chrome 
+	on CM random
+*/
+.browserChrome .head-text {
+	font-size: 12px;
+	font-style: oblique;
+	width: 500px;
+	font-variant: small-caps;
+	padding-left: 35px;
+}
+
+.browserChrome .head-text-list {
+	font-size: 12px;
+	font-style: oblique;
+	width: 500px;
+	font-variant: small-caps;
+	padding-left: 100px;
+}
+
+.browserChrome .head-text-eventlist {
+ 	font-size: 12px;
+    font-style: oblique;
+    font-variant: small-caps;
+    text-align: center;
+    width: 800px;
+    padding-top: 5%;
+}
+
+.browserChrome .head-text-edit {
+	font-size: 12px;
+	font-style: oblique;
+	width: 500px;
+	font-variant: small-caps;
+	padding-left: 50px;
+}
+
+.browserChrome #content {
+	/*background-image: url("../../pics/BGMain.png");*/
+    background-position: center 25px;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    width: 800px;
+    min-height: 700px;
+}
+
+.browserChrome .login-form {
+	padding-left: 80px;
+}
+
+.browserChrome .fieldset-view {
+	width: 320px;
+	padding-left: 50px;
+}
+
+.browserChrome .input-text {
+	width: 18em;
+	background: transparent;
+}
+
+.browserChrome .display-text {
+	width: 20em;
+	background: transparent;
+	background-color: #cccccc;
+	border-style: dashed;
+}
+
+.browserChrome .input-text-noborder {
+	width: 19.5em;
+	border: thin;
+	background: transparent;
+}
+
+.browserChrome .title-input {
+	text-align: right;
+	font-family: Arial, Verdana;
+    font-size: 14px;
+   	margin-left:5px;	
+	color:black;
+	
+}
+
+.browserChrome .input-text-keyword {
+	font-size: 12px;
+	size: 39em;
+}
+
+.browserChrome .register {
+	font-size: 11px;
+	padding-left: 25%;
+}
+
+.browserChrome .welcome-user {
+	padding-left: 250px;
+	font-size: 15px;
+}
+
+.browserChrome .list-table {
+	margin-left: 15px;
+	font-size: 11px;
+	border-spacing:0;
+	background: #fff;
+}
+
+.browserChrome .event-list {
+	height: 60px;
+	width: 150px;
+}
+
+.browserChrome .add-event {
+    float: left;
+    margin-left: 45%;
+    position: relative;
+}
+
+.browserChrome	.menu-mylist {
+	margin: 5px auto auto 50px;
+	width: 500px;
+	height: 100px;
+}
+
+.browserChrome .file-image input[type="file"] {
+	padding: 10 10 0 0;
+	margin: 10 10 0 0;
+	width: 100px;
+	height: 20px;
+	font-size: 80%;
+}
+
+.browserChrome .file-image input[type="button"] {
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+	width: 50px;
+	height: 20px;
+	font-size: 80%;
+}
+
+/*  end css Chrome */ /*  css firefox 
+    on CM random */
+.browserFirefox .head-text {
+	font-size: 10px;
+	font-style: oblique;
+	width: 500px;
+	font-variant: small-caps;
+	padding-left: 25px;
+	
+	
+}
+
+.browserFirefox #content {
+	/*background-image: url("../../pics/BGMain.png");*/
+    background-position: center 25px;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    width: 800px;
+    min-height: 700px;
+}
+
+.browserFirefox .login-form {
+	padding-top: 20px;
+	padding-left: 50px;
+}
+
+.browserFirefox .welcome-user {
+	padding-left: 240px;
+	font-size: 15px;
+}
+
+.browserFirefox .fieldset-view {
+	width: 320px;
+	padding-left: 20px;
+}
+
+.browserFirefox .input-text {
+	width: 18em;
+	background: transparent;
+}
+
+.browserFirefox .display-text {
+	width: 20em;
+	background: transparent;
+	background-color: #cccccc;
+	border-style: dashed;
+}
+
+.browserFirefox .input-text-noborder {
+	width: 17em;
+	border: thin;
+	background: transparent;
+}
+
+.browserFirefox .title-input {
+	font-size: 12px;
+	text-align: right;
+	font-weight: bold;
+	width: 60px;
+}
+
+.browserFirefox .input-text-keyword {
+	font-size: 12px;
+	size: 39em;
+}
+
+.browserFirefox .register {
+	font-size: 11px;
+	padding-left: 25%;
+}
+
+.browserFirefox .list-table {
+	margin-left: 15px;
+	font-size: 11px;
+	border-spacing:0;
+	background: #fff
+}
+
+.browserFirefox .head-text-list {
+	font-size: 12px;
+	font-style: oblique;
+	width: 500px;
+	font-variant: small-caps;
+	padding-left: 60px;
+}
+
+.browserFirefox .head-text-eventlist {
+    font-size: 12px;
+    font-style: oblique;
+    font-variant: small-caps;
+    text-align: center;
+    width: 800px;
+      padding-top: 5%;
+    
+}
+
+.browserFirefox .head-text-edit {
+	font-size: 10px;
+	font-style: oblique;
+	width: 500px;
+	font-variant: small-caps;
+	padding-left: 40px;
+}
+
+.browserFirefox .event-list {
+	height: 60px;
+	width: 150px;
+}
+
+.browserFirefox .add-event {
+    float: left;
+    margin-left: 45%;
+    position: relative;
+}
+
+.browserFirefox	.menu-mylist {
+	margin: 5px auto auto 50px;
+	width: 500px;
+	height: 100px;
+}
+
+/* end css firefox */
+A:link {
+	text-decoration: none
+}
+
+A:visited {
+	text-decoration: none
+}
+
+A:active {
+	text-decoration: none
+}
+
+A:hover {
+	text-decoration: underline;
+	color: #ffffff;
+}
+
+.keyword {
+	width: 14em;
+}
+
+.td-style {
+	padding: 8px; 
+	border-top: 1px solid #ddd;
+	align:center;
+	font-size: 14px;
+}
+.th-style {
+	font-size: 14px;
+	font-weight: normal;
+	background: #BB2C2C;
+	/*border-top: 4px solid #FFFFFF;*/
+	border-bottom: 1px solid #FFFFFF;
+	color: #FFFFFF;
+    padding: 8px;
+}
+table.list-table tbody tr:hover td {
+background: #E78C8C;
+color: #339;
+font-size: 16px;
+}
+tfoot td{
+	background: #099C38;
+    color: #FFFFFF;;
+}
+.register {
+	padding-left: 25%;
+}
+
+.warning {
+	padding-left: 230px;
+	text-align: left;
+}
+
+.back-link {
+	padding-top: 10px;
+	padding-left: 50px;
+	font-size: 15px;
+	float: left;
+}
+
+.logout {
+	padding-top: 10px;
+	padding-left: 280px;
+	font-size: 15px;
+}
+
+#copyright {
+	bottom: 0;
+    font-size: 10px;
+    position: relative;
+    text-align: center;
+    width: 800px;
+}
+
+.member-list {
+	margin: 0 10px auto 100px;
+	float: left;
+	width: 110px;
+	color: #2C5463;
+}
+
+.event-manage {
+	margin: 5px auto auto 50px;
+}
+
+.photo-event {
+	margin-left: 60px;
+	text-align: left;
+	float: left;
+}
+
+.event-control {
+	text-align: left;
+	margin-left: 150px;
+}
+
+.event-buttom {
+	margin-left: 5px;
+	text-align: left;
+}
+
+.file-image input[type="file"] {
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+	width: 100px;
+	height: 20px;
+	font-size: 80%;
+}
+
+.file-image input[type="button"] {
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+	width: 50px;
+	height: 20px;
+	font-size: 50%;
+}
+
+.delete-event {
+	cursor: pointer;
+	float: left;
+}
+
+.add-delete{
+	position: relative;
+    text-align: center;
+}
+
+#desc {
+	font-family: Arial, "lucida grande", tahoma, sans-serif, Verdana;
+	font-size: 15px;
+	resize: none;
+}
+
+#language {
+    margin-top:6px;
+  /*  position: relative;
+    width: 50px; */
+    padding: 2px 0 0 12px;
+}
+
+#localelink_th {
+	cursor: pointer
+}
+
+#localelink_en {
+	cursor: pointer
+}
+
+h1 {
+	color: #2C5463;
+	text-align: center;
+}
+
+h4 {
+	color: #2C5463;
+}
+
+#deleteFrm {
+	margin: auto;
+}
+
+#frm-event {
+	padding-left: 18%;
+    text-align: center;
+    width: 600px;
+}
+
+/*dialog jquery*/
+.ui-dialog {
+	font-size: 11px;
+}
+
+#question {
+	width: 300px !important;
+	height: 60px !important;
+	padding: 10px 0 0 10px;
+}
+
+#question img {
+	float: left;
+}
+
+#question span {
+	float: left;
+	margin: 20px 0 0 10px;
+}
+#table-event{
+	width: 65%; margin-left: auto; margin-right: auto;
+}
+#table-add{
+
+	margin-left: auto; margin-right: auto;
+}
+#edit-event-submit{
+	padding-top: 15px;
+	padding-right: 165px;
+}
+#userpass{
+	font-size: 16px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.login-page{
+	text-align: center;
+}
+.letter_closed{
+	margin-left: 40%;
+	margin-right: auto; 
+}
+#noteText{
+	font-size: 16px;
+}
+#dialog-modal{
+	display: none;
+}
+#send-mail{
+	font-size: 16px;
+}
+.mail{
+    position: absolute;
+    top: 70px;
+    left: 10%;	
+    margin-left:8%;
+}
+#foot-web{
+font-size:12px; text-align: center;
+}
+#foot-slide{
+ /*  position: fixed; */
+  margin-top: 5%;
+  bottom: 0px;
+  margin-right: auto;
+  margin-left: 5%;
+}
+#table-login{
+	margin-left: auto;
+	margin-right: auto;
+}
+#rafflebox{
+	margin-top: 5%; 
+	width: 25%;	
+	margin-left: auto;
+	margin-right: auto;
+}
+ #sender1,#sender2,#sender3,#sender4
+	  {
+
+	    -webkit-transform: rotateX(45deg);
+	    transform: rotateX(45deg);
+	    -ms-transform:rotateX(45deg); /* IE 9 */
+
+	   
+	    transform:rotate(7deg);
+		-ms-transform:rotate(7deg); /* IE 9 */
+        -webkit-transform:rotate(7deg); 
+	  } 
+	  
+#Nav-brand{
+	margin-left: 25px;
+	color:#FFFFFF;
+}
+#Nav-menu{
+	margin-right: 50px;
+}
+#navbar{
+	margin-left: 25px;	
+}
+
+#foot-myview{
+	margin-top: 40%
+}
+#back-button{
+	margin-top: 75%;
+}
+#backAdd{
+	background: none repeat scroll 0 0 #099C38;
+	border: 1px solid #FFFFFF;
+	box-shadow: none;
+	color: #FFFFFF;
+	padding: 10px 5px 10px 5px;
+	
+}
+#backAdd, #backBtn{
+	display: inline;
+    float: left;
+}
+#addBtn{
+	margin-top: 20px;
+	margin-left: 82px;
+}
+#navBanner{
+		background: #BB2C2C;
+}
+#btnLogout{
+background: #099C38;
+margin-left: 15px;
+}
+#backToEvent{
+	margin-left: 45px;
+}
+#backBtnMyView{
+	margin-left: 65px;
+	background: none repeat scroll 0 0 #099C38;
+	border: 1px solid #FFFFFF;
+	box-shadow: none;
+	color: #FFFFFF;
+	padding: 10px 5px 10px 5px;
+}
+#snow{
+	background: #B6E8EB;
+}

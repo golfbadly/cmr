@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>cmr</display-name>
+	<servlet>
+		<servlet-name>cmr</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>LoadIndex</servlet-name>
+		<servlet-class>com.xplink.random_cm.servlets.HttpsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoadIndex</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping> 
+
+	<servlet-mapping>
+		<servlet-name>cmr</servlet-name>
+		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.png</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.gif</url-pattern>
+	</servlet-mapping>
+	
+    <servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpeg</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<description></description>
+		<display-name>DeleteSlideServlet</display-name>
+		<servlet-name>DeleteSlideServlet</servlet-name>
+		<servlet-class>com.xplink.random_cm.controller.ajax.DeleteSlideServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DeleteSlideServlet</servlet-name>
+		<url-pattern>/DeleteSlideServlet</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<!-- <welcome-file>jsp/home.jsp</welcome-file> --> 
+		<welcome-file>CallLogin.html</welcome-file>  
+	</welcome-file-list>
+	<!--..............................thai language encoding........................................... -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>	
+	    /WEB-INF/config/hibernateSpring.xml
+		/WEB-INF/config/hibernateSpring/slideHibernateSpring.xml 
+        /WEB-INF/cmr-servlet.xml
+		</param-value>
+	</context-param>
+
+	<!--filter> <filter-name>springSecurityFilterChain</filter-name> <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
+		</filter> <filter-mapping> <filter-name>springSecurityFilterChain</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping -->
+
+	<!--filter> <filter-name>httpsRedirectFilter</filter-name> <filter-class>com.xplink.random.filter.HttpsRedirectFilter</filter-class> 
+		</filter> <filter-mapping> <filter-name>httpsRedirectFilter</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping -->
+
+</web-app>

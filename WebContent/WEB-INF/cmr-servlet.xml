@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+
+	<!--bean id="successHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler"> 
+		<property name="redirectStrategy" ref="customRedirect"/> <property name="defaultTargetUrl" 
+		value="/" /> </bean -->
+	<!--intercept-url pattern="/**" requires-channel ="https" / -->
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/cmr2014?characterEncoding=UTF-8" />
+		<property name="username" value="root" />
+		<property name="password" value="3009" />
+	</bean> 
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>/WEB-INF/config/configuration.properties</value>
+		</property>
+		<property name="fileEncoding" value="UTF-8" />
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames"><!--resource bundles defined on your classpath -->
+			<list>
+				<value>WEB-INF/messages/messages</value>
+			</list>
+		</property>
+		<property name="cacheSeconds" value="5" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+
+	<!-- Declare the Interceptor -->
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" ref="localeSessionAttributeName" />
+	</bean>
+	<bean id="localeSessionAttributeName" class="java.lang.String">
+		<constructor-arg>
+			<value>LOCALE</value>
+		</constructor-arg>
+	</bean>
+
+	<!-- Declare the Resolver -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" ref="defaultLocale" />
+	</bean>
+
+	<bean id="defaultLocale" class="java.util.Locale">
+		<constructor-arg>
+			<value>th</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="UploadByCommon"
+		class="com.xplink.random_cm.service.uploadImgImplement.UploadByCommonImp">
+		<property name="uploadImage">
+			<value>${uploadImage}</value>
+		</property>
+		<property name="renderImageFile">
+			<ref bean="RenderImageFile" />
+		</property>
+	</bean>
+
+	<bean name="RenderImageFile" class="com.xplink.random_cm.service.RenderImageFile">
+		<property name="width">
+			<value>${width}</value>
+		</property>
+		<property name="height">
+			<value>${height}</value>
+		</property>
+	</bean>
+
+	<bean id="QueryService" class="com.xplink.random_cm.service.QueryService">
+		<property name="slideDAO">
+			<ref bean="SlideDAO" />
+		</property>
+		<property name="slideUploadDAO">
+			<ref bean="SlideUploadDAO" />
+		</property>
+		<property name="slidePreviewDAO">
+			<ref bean="SlidePreviewDAO" />
+		</property>
+		<property name="pageSize">
+			<value>${pageSize}</value>
+		</property>
+		<property name="paginationService">
+			<ref bean="PaginationService" />
+		</property>
+		<property name="txManager">
+			<ref bean="hibernateTransactionManager" />
+		</property>
+		<property name="uploadImgService">
+			<ref bean="UploadByCommon" />
+		</property>
+	</bean>
+
+	<bean id="PaginationService" class="com.xplink.random_cm.service.PaginationService">
+		<property name="pageSize">
+			<value>${pageSize}</value>
+		</property>
+	</bean>
+
+	<bean id="decryptedUsername"
+		class="org.springframework.beans.factory.config.PropertyPathFactoryBean">
+		<property name="targetBeanName">
+			<value>userPassDecrypter</value>
+		</property>
+		<property name="propertyPath">
+			<value>username</value>
+		</property>
+	</bean>
+
+	<bean id="decryptedPassword"
+		class="org.springframework.beans.factory.config.PropertyPathFactoryBean">
+		<property name="targetBeanName">
+			<value>userPassDecrypter</value>
+		</property>
+		<property name="propertyPath">
+			<value>password</value>
+		</property>
+	</bean>
+
+	<bean id="userPassDecrypter" class="com.xplink.util.security.UserPassDecrypter">
+		<property name="keyFile">
+			<value>${key_FilePath}/${key_file}</value>
+		</property>
+		<property name="username">
+			<value>${DB_user}</value>
+		</property>
+		<property name="password">
+			<value>${DB_password}</value>
+		</property>
+	</bean>
+
+	<bean id="LoginService" class="com.xplink.random_cm.service.LoginService">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+
+	</bean>
+
+	<bean id="AddKeywordSpaceManager" class="com.xplink.random_cm.managements.AddKeywordSpaceManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="GetListKeywordManager" class="com.xplink.random_cm.managements.GetListKeywordManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="GetlistManager" class="com.xplink.random_cm.managements.GetlistManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="GetMemberDetailManager" class="com.xplink.random_cm.managements.GetMemberDetailManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="GetMissionManager" class="com.xplink.random_cm.managements.GetMissionManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="InputKeywordManager" class="com.xplink.random_cm.managements.InputKeywordManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="ListManagement" class="com.xplink.random_cm.managements.ListManagement">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="LoginManager" class="com.xplink.random_cm.managements.LoginManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="UpdateKeywordManager" class="com.xplink.random_cm.managements.UpdateKeywordManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="UpdateMemberProfileManager"
+		class="com.xplink.random_cm.managements.UpdateMemberProfileManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="UpdateStatusManager" class="com.xplink.random_cm.managements.UpdateStatusManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="GetKeywordManager" class="com.xplink.random_cm.managements.GetKeywordManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="EventDetailRegisterService" class="com.xplink.random_cm.service.EventDetailRegisterService">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="EventlistService" class="com.xplink.random_cm.service.EventlistService">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="EventManageService" class="com.xplink.random_cm.service.EventManageService">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="registerService">
+			<ref bean="RegisterService" />
+		</property>
+	</bean>
+
+
+
+	<bean id="RegisterService" class="com.xplink.random_cm.service.RegisterService">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="RandomKeyWord" class="com.xplink.random_cm.random.RandomKeyWord">
+		<property name="updateKeywordManager">
+			<ref bean="UpdateKeywordManager" />
+		</property>
+	</bean>
+
+
+
+	<!--=============================== Controller Mapping ================================================= -->
+
+	<bean name="/switchLang.html" class="com.xplink.random_cm.service.AjaxSwitchLangController" />
+
+	<bean name="/GetDetailMember.html" class="com.xplink.random_cm.servlets.GetDetailMemberServlet" />
+
+	<bean name="/Getlist.html" class="com.xplink.random_cm.servlets.GetlistServlet">
+		<property name="eventManageService">
+			<ref bean="EventManageService" />
+		</property>
+		<property name="getlistManager">
+			<ref bean="GetlistManager" />
+		</property>
+	</bean>
+
+	<bean name="/GetEventToedit.html"
+		class="com.xplink.random_cm.servlets.GetEventDataToEditServlet">
+		<property name="imgPath">
+			<value>${images-path}</value>
+		</property>
+		<property name="imgPathOnServer">
+			<value>${images-path-on-server}</value>
+		</property>
+		<property name="eventManageService">
+			<ref bean="EventManageService" />
+		</property>
+	</bean>
+
+	<bean name="/event-list.html" class="com.xplink.random_cm.servlets.EventlistServlet">
+		<property name="eventlistService">
+			<ref bean="EventlistService" />
+		</property>
+		<property name="eventManageService">
+			<ref bean="EventManageService" />
+		</property>
+	</bean>
+
+	<bean name="/deleteEvent.html" class="com.xplink.random_cm.servlets.EventDeleteServlet">
+		<property name="imgPath">
+			<value>${images-path}</value>
+		</property>
+		<property name="eventManageService">
+			<ref bean="EventManageService" />
+		</property>
+	</bean>
+
+	<bean name="/Login.html" class="com.xplink.random_cm.servlets.LoginServlet">
+		<property name="symmetricCipher">
+			<ref bean="SymmetricCipher" />
+		</property>
+		<property name="loginService">
+			<ref bean="LoginService" />
+		</property>
+	</bean>
+
+	<bean name="/Register.html" class="com.xplink.random_cm.servlets.RegisterSevlet">
+		<property name="symmetricCipher">
+			<ref bean="SymmetricCipher" />
+		</property>
+		<property name="registerService">
+			<ref bean="RegisterService" />
+		</property>
+	</bean>
+
+	<!-- <bean name="/Sentmail.html" class="com.xplink.random_cm.servlets.SendmailServlet" 
+		> <property name="symmetricCipher"> <ref bean="SymmetricCipher"/> </property> 
+		<property name="getMissionManager"> <ref bean="GetMissionManager"/> </property> 
+		<property name="getlistManager"> <ref bean="GetlistManager"/> </property> 
+		</bean> -->
+	<bean name="/SendMail.html" class="com.xplink.random_cm.servlets.SendmailServlet">
+
+	</bean>
+
+	<bean name="/UpdateKeyword.html" class="com.xplink.random_cm.servlets.UpdateKeywordServlet" />
+
+	<bean name="/MyView.html" class="com.xplink.random_cm.servlets.MyviewServlet">
+		<property name="symmetricCipher">
+			<ref bean="SymmetricCipher" />
+		</property>
+		<property name="getKeywordManager">
+			<ref bean="GetKeywordManager" />
+		</property>
+		<property name="getMissionManager">
+			<ref bean="GetMissionManager" />
+		</property>
+		<property name="eventManageService">
+			<ref bean="EventManageService" />
+		</property>
+	</bean>
+
+	<bean name="/CallRegister.html" class="com.xplink.random_cm.servlets.CallRegisterServlet" />
+	<bean name="/CallLogin.html" class="com.xplink.random_cm.servlets.CallLoginServlet" />
+	<bean name="/CallMail.html" class="com.xplink.random_cm.servlets.CallMailServlet" />
+
+	<bean name="/CheckMember.html" class="com.xplink.random_cm.servlets.CheckMemberServlet">
+		<property name="loginService">
+			<ref bean="LoginService" />
+		</property>
+		<property name="eventManageService">
+			<ref bean="EventManageService" />
+		</property>
+	</bean>
+
+	<bean name="/UpdateMemberProfile.html"
+		class="com.xplink.random_cm.servlets.UpdateMemberProfileServlet">
+		<property name="symmetricCipher">
+			<ref bean="SymmetricCipher" />
+		</property>
+		<property name="getMemberDetailManager">
+			<ref bean="GetMemberDetailManager" />
+		</property>
+	</bean>
+
+	<bean name="/StartUpdateMemberProfile.html"
+		class="com.xplink.random_cm.servlets.StartUpdateMemberProfileServlet">
+		<property name="symmetricCipher">
+			<ref bean="SymmetricCipher" />
+		</property>
+		<property name="getMemberDetailManager">
+			<ref bean="GetMemberDetailManager" />
+		</property>
+	</bean>
+
+
+	<bean name="/editEvent.html" class="com.xplink.random_cm.servlets.EventEditServlet">
+		<property name="imgPath">
+			<value>${images-path}</value>
+		</property>
+		<property name="imgPathOnServer">
+			<value>${images-path-on-server}</value>
+		</property>
+		<property name="eventManageService">
+			<ref bean="EventManageService" />
+		</property>
+	</bean>
+
+	<bean name="/deleteEventImg.html" class="com.xplink.random_cm.servlets.EventImgDeleteServlet">
+		<property name="imgPath">
+			<value>${images-path}</value>
+		</property>
+		<property name="eventManageService">
+			<ref bean="EventManageService" />
+		</property>
+	</bean>
+
+	<bean name="/addEvent.html" class="com.xplink.random_cm.servlets.EventAddServlet">
+		<property name="eventManageService">
+			<ref bean="EventManageService" />
+		</property>
+	</bean>
+
+	<bean name="/menu.html" class="com.xplink.random_cm.servlets.MenuServlet">
+	</bean>
+
+	<bean name="/Logout.html" class="com.xplink.random_cm.servlets.LogoutServlet" />
+
+	<bean name="/adsSlide.html" class="com.xplink.random_cm.controller.SlideShowController">
+		<property name="queryService">
+			<ref bean="QueryService" />
+		</property>
+		<property name="imageDir">
+			<value>${imageDir}</value>
+		</property>
+		<property name="adsDir">
+			<value>${adsDir}</value>
+		</property>
+		<property name="viewAdsImg">
+			<value>${viewAdsImg}</value>
+		</property>
+	</bean>
+
+	<bean name="/slidePreview.html"
+		class="com.xplink.random_cm.controller.PreviewSlideShowController">
+		<property name="queryService">
+			<ref bean="QueryService" />
+		</property>
+		<property name="imageDir">
+			<value>${imageDir}</value>
+		</property>
+	</bean>
+
+	<bean name="/listAdsSlide.html"
+		class="com.xplink.random_cm.controller.ListSlideShowController">
+		<property name="queryService">
+			<ref bean="QueryService" />
+		</property>
+		<property name="imageDir">
+			<value>${imageDir}</value>
+		</property>
+		<property name="adsDir">
+			<value>${adsDir}</value>
+		</property>
+		<property name="viewAdsImg">
+			<value>${viewAdsImg}</value>
+		</property>
+	</bean>
+
+	<bean name="/addAdsSlide.html"
+		class="com.xplink.random_cm.controller.AddSlideShowController">
+		<property name="queryService">
+			<ref bean="QueryService" />
+		</property>
+	</bean>
+
+	<bean name="/editAdsSlide.html"
+		class="com.xplink.random_cm.controller.EditSlideShowController">
+		<property name="queryService">
+			<ref bean="QueryService" />
+		</property>
+		<property name="viewAdsImg">
+			<value>${viewAdsImg}</value>
+		</property>
+	</bean>
+
+	<bean name="/detailSlide.html"
+		class="com.xplink.random_cm.controller.DetailSlideShowController">
+		<property name="queryService">
+			<ref bean="QueryService" />
+		</property>
+		<property name="viewAdsImg">
+			<value>${viewAdsImg}</value>
+		</property>
+
+	</bean>
+
+	<bean name="/goToAddAdsSlide.html"
+		class="com.xplink.random_cm.controller.GotoAdsSlideController" />
+
+	<bean name="/goToEditAdsSlide.html"
+		class="com.xplink.random_cm.controller.GotoEditSlideController">
+		<property name="queryService">
+			<ref bean="QueryService" />
+		</property>
+		<property name="viewAdsImg">
+			<value>${viewAdsImg}</value>
+		</property>
+	</bean>
+
+	<bean name="/deleteAdsSlide.html"
+		class="com.xplink.random_cm.controller.DeleteSlideShowController">
+		<property name="queryService">
+			<ref bean="QueryService" />
+		</property>
+
+	</bean>
+
+
+	<bean name="SymmetricCipher" class="com.xplink.random_cm.dataencryption.SymmetricCipher">
+		<property name="keyFile">
+			<!-- <value>${AppBasePath}/WEB-INF/secretKey</value> -->
+			<!-- Dev -->
+			<value>${AppBasePath}/WebContent/WEB-INF/secretKey</value>
+		</property>
+	</bean>
+
+	<bean name="/attachment.html" class="com.xplink.random_cm.controller.AttachmentController">
+		<property name="workspacePath">
+			<value>${WorkspacePath}</value>
+		</property>
+		<property name="noPhotoPath">
+			<value>${AppBasePath}/pics/noBanner.jpg</value>
+		</property>
+		<property name="bufferSize">
+			<value>${attachment.buffer.size}</value>
+		</property>
+		<property name="imageExtensionList">
+			<ref bean="imageExtension" />
+		</property>
+	</bean>
+
+	<bean name="imageExtension" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>gif</value>
+				<value>jpg</value>
+				<value>jpeg</value>
+				<value>png</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean name="/DeleteSlideServlet"
+		class="com.xplink.random_cm.controller.ajax.DeleteSlideServlet">
+		<property name="queryService">
+			<ref bean="QueryService" />
+		</property>
+	</bean>
+
+	<bean name="/note.html"
+		class="com.xplink.random_cm.controller.ajax.AjaxNoteTextServlet">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+	
+	<bean name="/Inputkeyword.html" class="com.xplink.random_cm.servlets.InputkeywordServlet">
+		<property name="symmetricCipher">
+			<ref bean="SymmetricCipher" />
+		</property>
+		<property name="inputKeywordManager">
+			<ref bean="InputKeywordManager" />
+		</property>
+		<property name="updateStatusManager">
+			<ref bean="UpdateStatusManager" />
+		</property>
+		<property name="postFBWallService">
+			<ref bean="PostFBWallService" />
+		</property>
+		<property name="fbCanvasPage">
+			<value>${fbCanvasPage}</value>
+		</property>
+	</bean>
+	
+	<bean name="/Randoms.html" class="com.xplink.random_cm.servlets.RandomServlet">
+		<property name="symmetricCipher">
+			<ref bean="SymmetricCipher" />
+		</property>
+		<property name="getListKeywordManager">
+			<ref bean="GetListKeywordManager" />
+		</property>
+		<property name="getMissionManager">
+			<ref bean="GetMissionManager" />
+		</property>
+		<property name="getlistManager">
+			<ref bean="GetlistManager" />
+		</property>
+		<property name="eventManageService">
+			<ref bean="EventManageService" />
+		</property>
+		<property name="randomKeyWord">
+			<ref bean="RandomKeyWord" />
+		</property>
+		<property name="postFBWallService">
+			<ref bean="PostFBWallService" />
+		</property>
+		<property name="fbCanvasPage">
+			<value>${fbCanvasPage}</value>
+		</property>
+	</bean>
+
+	<!-- Facebook -->
+
+	<bean name="PostFBWallService" class="com.xplink.random_cm.service.PostFBWallService" />
+
+	<bean name="FBAuthorizeService" class="com.xplink.random_cm.service.FBAuthorizeService">
+		<property name="fbAppId">
+			<value>${fbAppId}</value>
+		</property>
+		<property name="fbSecretKey">
+			<value>${fbSecretKey}</value>
+		</property>
+		<property name="fbCanvasPage">
+			<value>${fbCanvasPage}</value>
+		</property>
+	</bean>
+	
+	<!-- <bean name="EventAcceptServlet" class="com.xplink.random_cm.servlets.EventAcceptServlet">
+		<property name="eventAcceptService">
+			<ref bean="EventAcceptService" />
+		</property>
+	</bean> -->
+	
+    <bean name="EventAcceptService" class="com.xplink.random_cm.service.EventAcceptService">
+		<property name="fbAppId">
+			<value>${fbAppId}</value>
+		</property>
+		<property name="fbSecretKey">
+			<value>${fbSecretKey}</value>
+		</property>
+		<property name="fbCanvasPage">
+			<value>${fbCanvasPage}</value>
+		</property>
+	</bean>
+
+	<bean name="/home.html" class="com.xplink.random_cm.servlets.FBAuthorizeServlet">
+		<property name="fbAuthorizeService">
+			<ref bean="FBAuthorizeService" />
+		</property>
+	</bean>
+
+	<bean name="/agent.html" class="com.xplink.random_cm.servlets.FBAgentServlet">
+		<property name="symmetricCipher">
+			<ref bean="SymmetricCipher" />
+		</property>
+		<property name="loginService">
+			<ref bean="LoginService" />
+		</property>
+		<property name="registerService">
+			<ref bean="RegisterService" />
+		</property>
+		<property name="eventManageService">
+			<ref bean="EventManageService" />
+		</property>
+		<property name="eventAcceptService">
+			<ref bean="EventAcceptService" />
+		</property>
+	</bean>
+
+</beans>

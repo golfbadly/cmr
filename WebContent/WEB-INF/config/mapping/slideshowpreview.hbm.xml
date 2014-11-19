@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.xplink.random_cm.datamodel.SlideShowPreview"
+		table="cmr_slide_preview">
+		<id name="slideId" type="string" column="SLIDE_ID" >
+		</id>
+
+		<property name="image" type="string" column="IMAGE"></property>
+		<property name="url" type="string" column="URL" />
+		
+		<set name="slideSet" inverse="true" lazy="false">
+			<key column="SLIDE_ID" />
+			<one-to-many class="com.xplink.random_cm.datamodel.SlideShowUploadPreview" />
+		</set>
+
+		<property name="deleteFlag" type="char" column="DELETE_FLAG" />
+		<property name="displayDate" type="timestamp" column="DISPLAY_DATE" />
+		<property name="expireDate" type="timestamp" column="EXPIRE_DATE" />
+		<property name="createdBy" type="string" column="CREATED_BY" />
+		<property name="updatedBy" type="string" column="UPDATED_BY"></property>
+		<property name="createdDate" type="timestamp" column="CREATED_DATE" />
+		<property name="updatedDate" type="timestamp" column="UPDATED_DATE" />
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       	http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       	http://www.springframework.org/schema/aop
+ 		http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+ 		
+<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>./WEB-INF/config/configuration.properties</value>
+		</property>
+		
+	</bean>
+
+	<!-- Persistent setting -->
+	<bean id="hibernateTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="hibernateSessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="hibernateInterceptor"
+		class="org.springframework.orm.hibernate3.HibernateInterceptor">
+		<property name="sessionFactory">
+			<ref bean="hibernateSessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="hibernateSessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="mappingDirectoryLocations">
+			<list>
+				<value>./WEB-INF/config/mapping</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+<!--				<prop key="hibernate.dialect">-->
+<!--					org.hibernate.dialect.OracleDialect-->
+<!--				</prop>-->
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQL5InnoDBDialect
+				</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernaye.use_sql_comments">false</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop> 				
+			</props>
+		</property>
+
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="HibernateUtil"
+          class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod"
+                  value="com.xplink.util.database.hibernate.HibernateUtil.setSessionFactory"/>
+        <property name="arguments">
+            <list>
+                <ref bean="hibernateSessionFactory"/>
+            </list>
+        </property>
+    </bean>
+	<bean id="dataSourceTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+	</bean>
+	
+	<bean id="decryptedUsername" class="org.springframework.beans.factory.config.PropertyPathFactoryBean">
+		<property name="targetBeanName"><value>userPassDecrypter</value></property>
+		<property name="propertyPath"><value>username</value></property>
+	</bean>
+
+	<bean id="decryptedPassword" class="org.springframework.beans.factory.config.PropertyPathFactoryBean">
+		<property name="targetBeanName"><value>userPassDecrypter</value></property>
+		<property name="propertyPath"><value>password</value></property>
+	</bean>
+	
+	<bean id="userPassDecrypter" class="com.xplink.util.security.UserPassDecrypter">
+		<property name="keyFile"><value>${key_FilePath}/secretKey</value></property>
+		<property name="username"><value>${DB_user}</value></property>
+		<property name="password"><value>${DB_password}</value></property>
+	</bean>
+
+	<!-- MySQL on neo plain -->
+	<!--<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql:${DB_IP_Port}</value>
+		</property>
+		<property name="username" value="xp-link"/>
+		<property name="password" value="xplink"/>
+		<property name="suppressClose">
+			<value>true</value>
+		</property>
+	</bean>-->
+	
+	<!-- MySQL Encrypted -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql:${DB_IP_Port}" />
+		<property name="username" ref="decryptedUsername" />
+		<property name="password" ref="decryptedPassword" />
+		<property name="initialSize" value="1" />
+		<property name="maxActive" value="5" />
+		<property name="maxIdle" value="3" />
+	</bean>
+	<!--<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql:${DB_IP_Port}</value>
+		</property>
+		<property name="username" ref="decryptedUsername"/>
+		<property name="password" ref="decryptedPassword"/>
+		<property name="suppressClose">
+			<value>true</value>
+		</property>
+	</bean>-->
+	
+	<!-- Persistent setting -->
+	
+	<bean id="AutoReconnectDatabaseFilter" class="com.xplink.util.database.hibernate.AutoReconnectDatabaseFilter">
+		<property name="timeout" value="25200000"/><!-- 7 Hr. -->
+		<property name="sql" value="SELECT 1"/>
+	</bean>
+</beans>

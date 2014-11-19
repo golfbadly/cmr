@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.directwebremoting.org/schema/spring-dwr
+    http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+    
+	<!-- Start SlideDAO  -->
+	<bean id="SlideDAO"
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>com.xplink.random_cm.dao.SlideDAO</value>
+		</property>
+
+		<property name="interceptorNames">
+			<list>
+				<idref bean="hibernateInterceptor" />
+				<idref bean="SlideDAOTarget" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="SlideDAOTarget"
+		class="com.xplink.random_cm.dao.hibernate.SlideDAOHibernate">
+		<property name="sessionFactory">
+			<ref bean="hibernateSessionFactory" />
+		</property>
+	</bean>
+	<!-- End SlideDAO -->
+	
+		<!-- [Start] Slide preview -->
+	<bean id="SlidePreviewDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>com.xplink.random_cm.dao.SlidePreviewDAO</value>
+		</property>
+
+		<property name="interceptorNames">
+			<list>
+				<idref bean="hibernateInterceptor" />
+				<idref bean="SlideDAOPreviewTarget" />
+			</list>
+		</property>
+	</bean>
+	<bean id="SlideDAOPreviewTarget"
+		class="com.xplink.random_cm.dao.hibernate.SlidePreviewDAOHibernate">
+		<property name="sessionFactory">
+			<ref bean="hibernateSessionFactory" />
+		</property>
+	</bean>
+	<!-- [End] Slide preview -->
+	
+		<bean id="SlideUploadDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>com.xplink.random_cm.dao.SlideUploadDAO</value>
+		</property>
+
+		<property name="interceptorNames">
+			<list>
+				<idref bean="hibernateInterceptor" />
+				<idref bean="SlideUploadDAOTarget" />
+			</list>
+		</property>
+	</bean>
+	<bean id="SlideUploadDAOTarget"
+		class="com.xplink.random_cm.dao.hibernate.SlideUploadDAOHibernate">
+		<property name="sessionFactory">
+			<ref bean="hibernateSessionFactory" />
+		</property>
+	</bean>
+	
+	
+</beans>
